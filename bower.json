@@ -1,0 +1,22 @@
+{
+  "name": "EathPaginator",
+  "version": "0.1.0",
+  "authors": [
+    "Sigtryggur"
+  ],
+  "directory": "~/app/components/",
+  "description": "Simple JavaScript pagination",
+  "main": "index.html",
+  "license": "none",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3"
+  }
+}

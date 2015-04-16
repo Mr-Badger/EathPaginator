@@ -1,0 +1,2 @@
+# EathPaginator
+Simple JavaScript pagination.

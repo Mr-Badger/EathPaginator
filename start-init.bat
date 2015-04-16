@@ -1,0 +1,1 @@
+npm install & bower install & grunt & cd app & start chrome http://localhost:8000 & py -m SimpleHTTPServer 8000

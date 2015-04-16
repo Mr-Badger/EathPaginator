@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<meta name="description" content="">
+	<meta name="authors" content="Sigtryggur Ómarsson">
+
+	<title>Test</title>
+	<link rel="stylesheet" href="dist/css/main.min.css">
+	<script src="https://code.jquery.com/jquery-2.1.3.js"></script>
+</head>
+<body>
+	<div class="container">
+		<ul class="eathPaginator" id="eathPaginator"></ul>
+	</div>
+	<script src="dist/js/build.js"></script>
+	<script>
+		$(function() {
+			var a = new window.EathPaginator('#eathPaginator', {
+				pages: 80,
+				pageChanged: function(numba) { console.log(numba); }
+			});
+
+		});
+	</script>
+	<script src="//localhost:1337/livereload.js"></script>
+</body>
+</html>
