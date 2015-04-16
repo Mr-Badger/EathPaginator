@@ -15,8 +15,8 @@ window.EathPaginator = (function() {
 		this.leftEdge = options.leftEdge !== undefined ? options.leftEdge : options.edges !== undefined ? options.edges : 2;
 		this.rightEdge = options.rightEdge !== undefined ? options.rightEdge : options.edges !== undefined ? options.edges : 2;
 
-		this.leftMid = options.leftMid || options.midSides || 1;
-		this.rightMid = options.rightMid || options.midSides || 1;
+		this.leftMid = options.leftMid || options.mid || 1;
+		this.rightMid = options.rightMid || options.mid || 1;
 
 		this.dotOperator = options.dotOperator !== false; //default true
 		this.hasControls = options.hasControls || false;
@@ -72,7 +72,7 @@ window.EathPaginator = (function() {
 
 	EathPaginator.prototype._redrawDOM = function() {
 		that.el.empty();
-		var i, page, el, classTemp,
+		var i, page, el, classTemp, reverseTemp,
 			firstDots  = that.leftEdge + 1,
 			firstMid   = firstDots + that.leftMid + 1,
 			secondDots = firstMid + that.rightMid + 1,
@@ -82,9 +82,15 @@ window.EathPaginator = (function() {
 
 		//Add previous button
 		if(that.hasControls) {
-			classTemp = that.mainClass.concat(' ', that.prevClass, ' ', (1 === that.selected ? that.endClass : ''));
+			reverseTemp = that.reverseOrder ? that.pages : 1;
+			classTemp = that.mainClass.concat(' ', that.prevClass, ' ', (reverseTemp === that.selected ? that.endClass : ''));
 			el = $(that.element).addClass(classTemp);
-			that.el.append(el);
+			if(that.reverseOrder) {
+				reverseTemp = el;
+			}
+			else {
+				that.el.append(el);
+			}
 		}
 		//Add simple layout if pages are fewer than buttons.
 		if(that.pages <= totalPages) {
@@ -120,12 +126,22 @@ window.EathPaginator = (function() {
 				if(page === that.selected) {
 					el.addClass(that.activeClass);
 				}
-				that.el.append(el);
+
+				if(that.reverseOrder) {
+					that.el.prepend(el);
+				}
+				else {
+					that.el.append(el);
+				}
 			}
 		}
 		//Add next button
 		if(that.hasControls) {
-			classTemp = that.mainClass.concat(' ', that.nextClass, ' ', (that.pages === that.selected ? that.endClass : ''));
+			if(that.reverseOrder) {
+				that.el.prepend(reverseTemp);
+			}
+			reverseTemp = that.reverseOrder ? 1 : that.pages;
+			classTemp = that.mainClass.concat(' ', that.nextClass, ' ', (reverseTemp === that.selected ? that.endClass : ''));
 			el = $(that.element).addClass(classTemp);
 			that.el.append(el);
 		}

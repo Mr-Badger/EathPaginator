@@ -20,6 +20,11 @@
 		$(function() {
 			var a = new window.EathPaginator('#eathPaginator', {
 				pages: 80,
+				edges: 1,
+				mid: 2,
+				startPage: 12,
+				hasControls: true,
+				reverseOrder: true,
 				pageChanged: function(numba) { console.log(numba); }
 			});
 
