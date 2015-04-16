@@ -7,24 +7,31 @@ body {
 	background-color: #DDD;
 }
 
-li {
-	list-style: none;
-}
-
 .container {
 	max-width: 1180px;
 	margin: 0 auto;
 }
 
+#boxbox {
+	background-color: #BCB9BA;
+	outline: none;
+	.banner {
+		height: 300px;
+		background-color: #44BDA8;
+	}
+}
+
 .eathPaginator {
 	display: flex;
 	justify-content: center;
-	margin: 1em 0;
+	margin: 0;
+	padding: 1em 0;
 	text-align: center;
 	color: #337AB7;
 	user-select: none;
 
 	> .pag {
+		list-style: none;
 		padding: 7px 0;
 		width: 38px;
 		margin-left: -1px;

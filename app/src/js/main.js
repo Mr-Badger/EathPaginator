@@ -4,11 +4,12 @@ window.EathPaginator = (function() {
 
 	var EathPaginator = function(el, options) {
 		if (!el) {
-			throw new Error('A DOM element reference is required');
+			throw new Error('A DOM element reference is required!');
 		}
-		options = options || {};
 		that = this;
 		this.el = $(el);
+
+		options = options || {};
 		this.pages = options.pages || 1;
 		this.selected = options.startPage || 1;
 
@@ -19,8 +20,13 @@ window.EathPaginator = (function() {
 		this.rightMid = options.rightMid || options.mid || 1;
 
 		this.dotOperator = options.dotOperator !== false; //default true
-		this.hasControls = options.hasControls || false;
+		this.controls = options.controls || false;
 		this.reverseOrder = options.reverseOrder || false;
+
+		this.keyboard = $(options.keyboard) || undefined;
+		this.prevKeyCode = options.prevKeyCode || 37; //left-arrow
+		this.nextKeyCode = options.nextKeyCode || 39; //right-arrow
+
 		this.pageChanged = options.pageChanged || function(pageNumber) {};
 
 		this.pageClass = options.pageClass || 'page';
@@ -39,9 +45,12 @@ window.EathPaginator = (function() {
 		this.el.on('click', clickClasses, function(event) {
 			that.gotoPage(Number($(event.target).attr(that.dataPageClass)));
 		});
-		if(this.hasControls) {
+		if(this.controls) {
 			this.el.on('click', '.'+this.prevClass, function() { that.gotoPage(that.selected + (that.reverseOrder ? 1 : -1)); });
 			this.el.on('click', '.'+this.nextClass, function() { that.gotoPage(that.selected + (that.reverseOrder ? -1 : 1)); });
+		}
+		if(this.keyboard !== undefined) {
+			this.keyboard.on('keyup', this.keyboardEvent);
 		}
 
 		this._redrawDOM();
@@ -70,6 +79,17 @@ window.EathPaginator = (function() {
 		return that.selected;
 	};
 
+	EathPaginator.prototype.keyboardEvent = function(event) {
+		switch(event.keyCode) {
+			case that.prevKeyCode:   //left-arrow
+				that.gotoPage(that.selected + (that.reverseOrder ? 1 : -1));
+				break;
+			case that.nextKeyCode:   //right-arrow
+				that.gotoPage(that.selected + (that.reverseOrder ? -1 : 1));
+				break;
+		}
+	};
+
 	EathPaginator.prototype._redrawDOM = function() {
 		that.el.empty();
 		var i, page, el, classTemp, reverseTemp,
@@ -81,7 +101,7 @@ window.EathPaginator = (function() {
 			totalPages = secondDots + that.rightEdge;
 
 		//Add previous button
-		if(that.hasControls) {
+		if(that.controls) {
 			reverseTemp = that.reverseOrder ? that.pages : 1;
 			classTemp = that.mainClass.concat(' ', that.prevClass, ' ', (reverseTemp === that.selected ? that.endClass : ''));
 			el = $(that.element).addClass(classTemp);
@@ -136,7 +156,7 @@ window.EathPaginator = (function() {
 			}
 		}
 		//Add next button
-		if(that.hasControls) {
+		if(that.controls) {
 			if(that.reverseOrder) {
 				that.el.prepend(reverseTemp);
 			}

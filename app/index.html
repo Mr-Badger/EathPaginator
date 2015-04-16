@@ -13,18 +13,21 @@
 </head>
 <body>
 	<div class="container">
-		<ul class="eathPaginator" id="eathPaginator"></ul>
+		<div id="boxbox" tabindex="1">
+			<div class="banner"></div>
+			<ul class="eathPaginator" id="eathPaginator"></ul>
+		</div>
 	</div>
 	<script src="dist/js/build.js"></script>
 	<script>
 		$(function() {
 			var a = new window.EathPaginator('#eathPaginator', {
-				pages: 80,
+				pages: 1000,
 				edges: 1,
 				mid: 2,
 				startPage: 12,
-				hasControls: true,
-				reverseOrder: true,
+				keyboard: '#boxbox',
+				controls: true,
 				pageChanged: function(numba) { console.log(numba); }
 			});
 
