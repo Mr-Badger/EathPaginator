@@ -17,20 +17,35 @@
 			<div class="banner"></div>
 			<ul class="eathPaginator" id="eathPaginator"></ul>
 		</div>
+		<div id="boxbox2" tabindex="1">
+			<div class="banner"></div>
+			<ul class="eathPaginator" id="eathPaginator5"></ul>
+		</div>
 	</div>
 	<script src="dist/js/build.js"></script>
 	<script>
+
 		$(function() {
-			var a = new window.EathPaginator('#eathPaginator', {
+			var a = new EathPaginator('eathPaginator', {
 				pages: 1000,
 				edges: 1,
 				mid: 2,
 				startPage: 12,
 				keyboard: '#boxbox',
 				controls: true,
-				pageChanged: function(numba) { console.log(numba); }
+				pageChanged: function(numba) { console.log("DAMN: " + numba); }
 			});
 
+			var b = new EathPaginator('eathPaginator5', {
+				pages: 100,
+				edges: 1,
+				mid: 2,
+				startPage: 12,
+				keyboard: '#boxbox2',
+				controls: true,
+				reverseOrder: true,
+				pageChanged: function(numba) { console.log(numba); }
+			});
 		});
 	</script>
 	<script src="//localhost:1337/livereload.js"></script>

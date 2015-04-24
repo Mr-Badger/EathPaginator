@@ -17,9 +17,10 @@ module.exports = function(grunt) {
         devel:  true,
         globals: {
           _:       false,
-          Audio:   false,
-          jQuery:  false,
+          EathPaginator: false,
+          document: false,
           window:  false,
+          jQuery:  false,
           console: false,
           $:       false
         }
